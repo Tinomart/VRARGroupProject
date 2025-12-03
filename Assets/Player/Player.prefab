@@ -165,7 +165,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 0}
   m_StartingGroupMembers:
   - {fileID: 1733628645012200237}
-  - {fileID: 0}
+  - {fileID: 3387602342902123908}
   m_StartingInteractionOverridesMap: []
 --- !u!114 &1450115827379772986
 MonoBehaviour:
@@ -530,7 +530,7 @@ GameObject:
   - component: {fileID: 1202874219113580626}
   - component: {fileID: 1733628645012200237}
   - component: {fileID: 4450489208213695468}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LGrabInteractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1441,7 +1441,7 @@ GameObject:
   - component: {fileID: 8929114749507200072}
   - component: {fileID: 7172799627198091362}
   - component: {fileID: 3347632866471688992}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RGrabInteractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1721,7 +1721,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
