@@ -20,9 +20,15 @@ public class Galaxy : MonoBehaviour
         for (int i = 0; i < numOfArms; i++)
         {
             GameObject obj = Instantiate(armPrefeb);
+            if (obj.TryGetComponent<GalaxyArm>(out var arm))
+            {
+                // Yes, this GameObject contains a GalaxyArm component
+                arm.Setup();
+            }
+            obj.transform.SetParent(transform);
             arms.Add(obj);
             arms[i].transform.Translate(0,0,0);
-            arms[i].transform.Rotate(0, 0, (360/numOfArms)*i);
+            arms[i].transform.Rotate(0, (360/numOfArms)*i, 0);
         }   
     }
 }

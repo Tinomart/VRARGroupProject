@@ -18,7 +18,7 @@ public class GalaxyArm : MonoBehaviour
     
     public GameObject starPrefab;
         
-    void Start()
+    public void Setup()
     {
         for (int i = 0; i < starCount; i++)
         {
