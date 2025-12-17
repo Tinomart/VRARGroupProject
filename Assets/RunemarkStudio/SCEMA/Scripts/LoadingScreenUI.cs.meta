@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b9b067917b02dca43848e99f0071a0b1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154316
+  packageName: SCEMA - scene manager and loader
+  packageVersion: 1.0
+  assetPath: Assets/RunemarkStudio/SCEMA/Scripts/LoadingScreenUI.cs
+  uploadId: 332077

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0c5c9de3812aa2341ad3cd49676636a8
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154316
+  packageName: SCEMA - scene manager and loader
+  packageVersion: 1.0
+  assetPath: Assets/RunemarkStudio/SCEMA/Example/Scenes/SceneB.unity
+  uploadId: 332077

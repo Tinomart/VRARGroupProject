@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: abf95894525ed4e4ab5fab6672ce3927
+timeCreated: 1568978652
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154316
+  packageName: SCEMA - scene manager and loader
+  packageVersion: 1.0
+  assetPath: Assets/RunemarkStudio/SCEMA/Example/Prefabs/LoadingScreenUI.prefab
+  uploadId: 332077
