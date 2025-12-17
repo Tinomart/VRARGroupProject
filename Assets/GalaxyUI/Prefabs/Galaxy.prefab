@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Galaxy
   numOfArms: 15
-  armPrefeb: {fileID: 1127212332746825680, guid: ca2207f00aafd7d4ca71a42f14dbaa31, type: 3}
+  armPrefeb: {fileID: 1127212332746825680, guid: f3e30f040b150cd4bba760b6bdd5d389, type: 3}
   arms: []
 --- !u!114 &3202021121912483128
 MonoBehaviour:

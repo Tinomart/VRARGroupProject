@@ -4,6 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
+
 public class Star : MonoBehaviour
 {
     public String sceneName = "Room1";
@@ -66,7 +67,7 @@ public class Star : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent<StarInteractor>(out StarInteractor starInteractor))
+        if (other.gameObject.TryGetComponent(out StarInteractor starInteractor))
         {
             if (_grabInteractable.isSelected)
             {
