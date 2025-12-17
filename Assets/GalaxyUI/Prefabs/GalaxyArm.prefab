@@ -50,4 +50,4 @@ MonoBehaviour:
   quadraticB: 0
   quadraticC: 0
   starCount: 12
-  starPrefab: {fileID: 6919565497558993047, guid: e5889cfb023a2b64a8149f47f645dc32, type: 3}
+  starPrefab: {fileID: 6919565497558993047, guid: 298f15745f934ca4c9d8c4a835e35588, type: 3}
