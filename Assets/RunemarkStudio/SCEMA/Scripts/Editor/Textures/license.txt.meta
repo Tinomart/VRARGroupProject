@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c539d7c465b2015419a83422bb9c0feb
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154316
+  packageName: SCEMA - scene manager and loader
+  packageVersion: 1.0
+  assetPath: Assets/RunemarkStudio/SCEMA/Scripts/Editor/Textures/license.txt
+  uploadId: 332077

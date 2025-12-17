@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: aa30a6320dbbcb34a9e05d94704cd2f4
+timeCreated: 1569412437
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154316
+  packageName: SCEMA - scene manager and loader
+  packageVersion: 1.0
+  assetPath: Assets/RunemarkStudio/SCEMA/Scripts/SceneAsset.cs
+  uploadId: 332077

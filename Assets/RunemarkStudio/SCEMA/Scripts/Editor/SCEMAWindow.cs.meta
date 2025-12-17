@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c1b0f76be7c0e724a8ce9c4e53196311
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154316
+  packageName: SCEMA - scene manager and loader
+  packageVersion: 1.0
+  assetPath: Assets/RunemarkStudio/SCEMA/Scripts/Editor/SCEMAWindow.cs
+  uploadId: 332077

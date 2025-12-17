@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: aee4959c13c8f864189bc8f9ecf0e850
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154316
+  packageName: SCEMA - scene manager and loader
+  packageVersion: 1.0
+  assetPath: Assets/RunemarkStudio/SCEMA/Example/Scenes/AdditiveScene.unity
+  uploadId: 332077

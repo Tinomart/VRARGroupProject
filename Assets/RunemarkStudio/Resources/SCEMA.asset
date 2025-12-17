@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a505043da4563442b2ba7273cd5b72e, type: 3}
+  m_Name: SCEMA
+  m_EditorClassIdentifier: 
+  LoadingScreenUI: {fileID: 1399964329613378, guid: abf95894525ed4e4ab5fab6672ce3927, type: 3}
+  MinLoadingTime: 2
+  locations:
+  - {fileID: 11400000, guid: 7d77f7e732054e1498ab164557eb3b14, type: 2}
+  - {fileID: 11400000, guid: 66dd0b2c323e1d74bb7d7efe981e8b1a, type: 2}
+  - {fileID: 11400000, guid: 827b4cb0d8602bb48b6e81d782cf7b81, type: 2}
+  AdditiveScenes:
+  - Scene:
+      name: GalaxyUI
+      asset: {fileID: 102900000, guid: 6b4c71171afa5af4f87f9ca67e5e38b6, type: 3}
+    DontDestroyOnLoad: 1

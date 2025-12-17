@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3311baa0999f9ef40b5cd9d66afef6ca
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154316
+  packageName: SCEMA - scene manager and loader
+  packageVersion: 1.0
+  assetPath: Assets/RunemarkStudio/Common/UIColorAnimator.cs
+  uploadId: 332077
