@@ -36,7 +36,7 @@ public class GalaxyArm : MonoBehaviour
 
         foreach (Transform star in starsTransforms)
         {
-            star.position = CalculateCurvePosition(starcount);
+            star.localPosition = CalculateCurvePosition(starcount);
             starcount++;
 
         }
