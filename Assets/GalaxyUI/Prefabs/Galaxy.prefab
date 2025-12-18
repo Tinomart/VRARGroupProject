@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010d36a9999edc44f8612894d7af5b12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Galaxy
-  numOfArms: 15
+  numOfArms: 7
   armPrefeb: {fileID: 1127212332746825680, guid: f3e30f040b150cd4bba760b6bdd5d389, type: 3}
   arms: []
 --- !u!114 &3202021121912483128

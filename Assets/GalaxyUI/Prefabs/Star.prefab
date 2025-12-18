@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 2db9375656e5c584dbfc6ee5f066ecac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,6 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd1109f829409d47ab6d8424ba1fe96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Star
+  sceneName: Room1
+  _grabInteractable: {fileID: 0}
 --- !u!54 &4803563292902699363
 Rigidbody:
   m_ObjectHideFlags: 0
