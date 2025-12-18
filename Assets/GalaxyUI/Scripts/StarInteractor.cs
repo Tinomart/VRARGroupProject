@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Runemark.SCEMA;
+//using Runemark.SCEMA;
 using UnityEngine;
 
 public class StarInteractor : MonoBehaviour
@@ -34,9 +34,9 @@ public class StarInteractor : MonoBehaviour
     public void SceneTransition(String sceneName)
     {
         Debug.Log(sceneName);
-        Debug.Log(SCEMA.Instance.FindLocation(sceneName));
-        Location location = SCEMA.Instance.FindLocation(sceneName);
-        location.Enter();
+        //Debug.Log(SCEMA.Instance.FindLocation(sceneName));
+        //Location location = SCEMA.Instance.FindLocation(sceneName);
+        //location.Enter();
             
     }
     

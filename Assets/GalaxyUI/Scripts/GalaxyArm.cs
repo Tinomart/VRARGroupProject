@@ -12,6 +12,7 @@ public class GalaxyArm : MonoBehaviour
     public float spiralAngle = 2f;
 
     public float quadraticA = 1f;
+    public Vector3 offset = new Vector3(1,0,0);
     public float quadraticB = 0f;
     public float quadraticC = 0f;
     public int starCount = 12;
@@ -46,7 +47,7 @@ public class GalaxyArm : MonoBehaviour
     {
         float posX = (float)Math.Cos(starNumber*spiralAngle/stars.Count) * starNumber*spiralRadius/stars.Count;
         float posY = (float)Math.Sin(starNumber*spiralAngle/stars.Count) * starNumber*spiralRadius/stars.Count;
-        return new Vector3(posX, 0, posY);
+        return new Vector3(posX, 0, posY) + offset;
     }
     
     float Quadratic(float x)

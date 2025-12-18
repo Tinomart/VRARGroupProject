@@ -49,5 +49,5 @@ MonoBehaviour:
   quadraticA: 1
   quadraticB: 0
   quadraticC: 0
-  starCount: 12
+  starCount: 8
   starPrefab: {fileID: 6919565497558993047, guid: 298f15745f934ca4c9d8c4a835e35588, type: 3}
