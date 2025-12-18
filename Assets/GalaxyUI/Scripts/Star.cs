@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -21,7 +22,7 @@ public class Star : MonoBehaviour
         _grabInteractable.activated.AddListener(OnActivated);
         _originalLayerMask = _grabInteractable.interactionLayers;
         _basePosition = transform.localPosition;
-        
+        sceneName = "Room" + UnityEngine.Random.Range(1, 11);;
     }
 
     // Update is called once per frame

@@ -15,11 +15,38 @@ EditorBuildSettings:
     path: Assets/GalaxyUI/Scenes/GalaxyUI.unity
     guid: 6b4c71171afa5af4f87f9ca67e5e38b6
   - enabled: 1
+    path: Assets/GalaxyUI/Scenes/ExampleRooms/Room1/Room1.unity
+    guid: ee6f8e8ba4b93564d9eaa7ff2a87dd45
+  - enabled: 1
     path: Assets/GalaxyUI/Scenes/ExampleRooms/Room2/Room2.unity
     guid: 29097c9ab48f434488ef13299881cdc4
   - enabled: 1
-    path: Assets/GalaxyUI/Scenes/ExampleRooms/Room1/Room1.unity
-    guid: ee6f8e8ba4b93564d9eaa7ff2a87dd45
+    path: Assets/GalaxyUI/Scenes/ExampleRooms/Room3/Room3.unity
+    guid: a466e8685598d934c90d15d7ec0da771
+  - enabled: 1
+    path: Assets/GalaxyUI/Scenes/ExampleRooms/Room4/Room4.unity
+    guid: 6408864c71b2f91489ba0b905d4d8c81
+  - enabled: 1
+    path: Assets/GalaxyUI/Scenes/ExampleRooms/Room5/Room5.unity
+    guid: ec97c7d2e9ae0dd4a9788e4a7d31a265
+  - enabled: 1
+    path: Assets/GalaxyUI/Scenes/ExampleRooms/Room6/Room6.unity
+    guid: 73424400c940c7b48acc2b92753474c3
+  - enabled: 1
+    path: Assets/GalaxyUI/Scenes/ExampleRooms/Room7/Room7.unity
+    guid: 6fd74ee9f5c464e48bb1c6f0d2ad0251
+  - enabled: 1
+    path: Assets/GalaxyUI/Scenes/ExampleRooms/Room8/Room8.unity
+    guid: 21e8b57b71b90a94bad77874e7f6ff4d
+  - enabled: 1
+    path: Assets/GalaxyUI/Scenes/ExampleRooms/Room9/Room9.unity
+    guid: 1c754e67b1cd5fe41a326d16985de825
+  - enabled: 1
+    path: Assets/GalaxyUI/Scenes/ExampleRooms/Room10/Room10.unity
+    guid: b3faed4b07775a849aa8705cbc5e8a14
+  - enabled: 1
+    path: Assets/GalaxyUI/Scenes/ExampleRooms/Room11/Room11.unity
+    guid: 30631f1f2158c28419f8b4746c76c7fe
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
