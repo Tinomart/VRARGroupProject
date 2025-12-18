@@ -1,13 +1,19 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 //using Runemark.SCEMA;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StarInteractor : MonoBehaviour
 {
+    private String galaxyUISceneName = "GalaxyUI";
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -33,11 +39,29 @@ public class StarInteractor : MonoBehaviour
     */
     public void SceneTransition(String sceneName)
     {
-        Debug.Log(sceneName);
-        //Debug.Log(SCEMA.Instance.FindLocation(sceneName));
-        //Location location = SCEMA.Instance.FindLocation(sceneName);
-        //location.Enter();
-            
+        UnloadAllAndLoad(sceneName);
     }
+    
+    public void UnloadAllAndLoad(string sceneName)
+    {
+        // Unload all except persistent
+        for (int i = SceneManager.sceneCount - 1; i >= 0; i--)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            if (scene.name != galaxyUISceneName)
+            {
+                SceneManager.UnloadSceneAsync(scene);
+            }
+        }
+    
+        // Load new scene
+        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        Resources.UnloadUnusedAssets();
+        
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+
+        DynamicGI.UpdateEnvironment();
+    }
+    
     
 }
