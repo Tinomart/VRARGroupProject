@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 /// <summary>
 /// Locks rotation on specified axes for both single and two-handed grabs
@@ -14,8 +15,10 @@ public class Galaxy : MonoBehaviour
     public int numOfArms = 15;
     public GameObject armPrefeb;
     public List<GameObject> arms = new List<GameObject>();
+    public GameObject overheadGesture;
+    private GestureControl _gestureControl;
 
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < numOfArms; i++)
         {
@@ -30,5 +33,10 @@ public class Galaxy : MonoBehaviour
             arms[i].transform.Translate(0,0,0);
             arms[i].transform.Rotate(0, (360/numOfArms)*i, 0);
         }   
+        
+        _gestureControl = overheadGesture.GetComponent<GestureControl>();
     }
+
+    
 }
+

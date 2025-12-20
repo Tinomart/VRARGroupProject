@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6150783808444216806, guid: 22e39ad56c82db54a91ea9e52a1eaca5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6328378179795340619, guid: 22e39ad56c82db54a91ea9e52a1eaca5, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
@@ -183,11 +187,137 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8360499429335613420, guid: 22e39ad56c82db54a91ea9e52a1eaca5, type: 3}
+      propertyPath: galaxy
+      value: 
+      objectReference: {fileID: 395848969}
+    - target: {fileID: 8360499429335613420, guid: 22e39ad56c82db54a91ea9e52a1eaca5, type: 3}
+      propertyPath: yOffset
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22e39ad56c82db54a91ea9e52a1eaca5, type: 3}
+--- !u!1 &302076158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 302076162}
+  - component: {fileID: 302076161}
+  - component: {fileID: 302076160}
+  - component: {fileID: 302076159}
+  m_Layer: 3
+  m_Name: Overhead Gesture
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!54 &302076159
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302076158}
+  serializedVersion: 5
+  m_Mass: 0.0000001
+  m_LinearDamping: 0
+  m_AngularDamping: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &302076160
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302076158}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &302076161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302076158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c8329fce9724b4f842e794f7ce6570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  playerCamera: {fileID: 1338066217}
+  offset: {x: 0, y: 0.7, z: 0}
+  galaxy: {fileID: 395848967}
+--- !u!4 &302076162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302076158}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.22462, y: 1.6, z: -17.70924}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &395848967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3839370072007414107, guid: 404b1882fe95ac446afcff3e7ce66b3f, type: 3}
+  m_PrefabInstance: {fileID: 1919647007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &395848969 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5804905262739300867, guid: 404b1882fe95ac446afcff3e7ce66b3f, type: 3}
+  m_PrefabInstance: {fileID: 1919647007}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395848967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 010d36a9999edc44f8612894d7af5b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Galaxy
+--- !u!20 &1338066217 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 688634953970070116, guid: 22e39ad56c82db54a91ea9e52a1eaca5, type: 3}
+  m_PrefabInstance: {fileID: 150727057}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1919647007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -240,6 +370,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Galaxy
       objectReference: {fileID: 0}
+    - target: {fileID: 3839370072007414107, guid: 404b1882fe95ac446afcff3e7ce66b3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804905262739300867, guid: 404b1882fe95ac446afcff3e7ce66b3f, type: 3}
+      propertyPath: gestureControl
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804905262739300867, guid: 404b1882fe95ac446afcff3e7ce66b3f, type: 3}
+      propertyPath: overheadGesture
+      value: 
+      objectReference: {fileID: 302076158}
+    - target: {fileID: 5804905262739300867, guid: 404b1882fe95ac446afcff3e7ce66b3f, type: 3}
+      propertyPath: gestureControlObject
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -251,3 +397,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 150727057}
   - {fileID: 1919647007}
+  - {fileID: 302076162}
