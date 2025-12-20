@@ -47,6 +47,7 @@ MonoBehaviour:
   spiralRadius: 12
   spiralAngle: 2
   quadraticA: 1
+  offset: {x: 2.25, y: 0, z: 0}
   quadraticB: 0
   quadraticC: 0
   starCount: 8
