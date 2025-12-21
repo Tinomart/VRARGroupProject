@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: bbf25b3eccd38c14da30a016f7bf9b63, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -129,7 +129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 542818526925532198, guid: 22e39ad56c82db54a91ea9e52a1eaca5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.22462
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 542818526925532198, guid: 22e39ad56c82db54a91ea9e52a1eaca5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 542818526925532198, guid: 22e39ad56c82db54a91ea9e52a1eaca5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.70924
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 542818526925532198, guid: 22e39ad56c82db54a91ea9e52a1eaca5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -280,7 +280,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   playerCamera: {fileID: 1338066217}
-  offset: {x: 0, y: 0.7, z: 0}
+  offset: {x: 0, y: 0.5, z: 0}
+  galaxyBaseScale: 0.2
+  galaxyOffset: {x: 0, y: 0.2, z: 0}
   galaxy: {fileID: 395848967}
 --- !u!4 &302076162
 Transform:
@@ -372,7 +374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2246018417900714487, guid: 404b1882fe95ac446afcff3e7ce66b3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 8.7
       objectReference: {fileID: 0}
     - target: {fileID: 2246018417900714487, guid: 404b1882fe95ac446afcff3e7ce66b3f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -430,7 +432,8 @@ PrefabInstance:
       propertyPath: gestureControlObject
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2108874417252580739, guid: 404b1882fe95ac446afcff3e7ce66b3f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

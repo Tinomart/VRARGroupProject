@@ -8,12 +8,14 @@ using UnityEngine.SceneManagement;
 
 public class StarInteractor : MonoBehaviour
 {
+    [SerializeField]
+    private String startingSceneName = "Room1";
     private String galaxyUISceneName = "GalaxyUI";
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        UnloadAllAndLoad(startingSceneName);
     }
 
     // Update is called once per frame
@@ -57,8 +59,6 @@ public class StarInteractor : MonoBehaviour
         // Load new scene
         SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         Resources.UnloadUnusedAssets();
-        
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
 
         DynamicGI.UpdateEnvironment();
     }
