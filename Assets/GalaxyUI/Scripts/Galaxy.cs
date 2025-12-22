@@ -15,8 +15,6 @@ public class Galaxy : MonoBehaviour
     public int numOfArms = 15;
     public GameObject armPrefeb;
     public List<GameObject> arms = new List<GameObject>();
-    public GameObject overheadGesture;
-    private GestureControl _gestureControl;
 
     private void Awake()
     {
@@ -30,11 +28,11 @@ public class Galaxy : MonoBehaviour
             }
             obj.transform.SetParent(transform);
             arms.Add(obj);
-            arms[i].transform.Translate(0,0,0);
+            arms[i].transform.localPosition = Vector3.zero;
+            arms[i].transform.localRotation = Quaternion.Euler(Vector3.zero);
             arms[i].transform.Rotate(0, (360/numOfArms)*i, 0);
         }   
         
-        _gestureControl = overheadGesture.GetComponent<GestureControl>();
     }
 
     
