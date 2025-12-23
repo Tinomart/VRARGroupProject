@@ -13,10 +13,9 @@ public class GestureControl : MonoBehaviour
     
     [SerializeField]
     private Vector3 offset = new Vector3(0f, 0.5f, 0f);
-    [SerializeField]
-    private float galaxyBaseScale = 0.2f;
-    [SerializeField]
-    private Vector3 galaxyOffset = new Vector3(0f, 0.5f, 0f);
+    [SerializeField] private float galaxyBaseScale = 0.2f;
+    [SerializeField] private float galaxyMinScale = 0.002f;
+    [SerializeField] private Vector3 galaxyOffset = new Vector3(0f, 0.5f, 0f);
     public GameObject galaxy;
     private XRGrabInteractable galaxyGrabInteractable;
     
@@ -70,6 +69,15 @@ public class GestureControl : MonoBehaviour
                 }
             }
         }
+
+        if (galaxy.transform.localScale.x < galaxyMinScale)
+        {
+            if (!galaxyGrabInteractable.isSelected)
+            {
+                DespawnGalaxy();
+            }
+            
+        } 
     }
     
     private void SpawnGalaxy(XRDirectInteractor grabInteractor)
