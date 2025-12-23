@@ -303,6 +303,7 @@ MonoBehaviour:
   playerCamera: {fileID: 1338066217}
   offset: {x: 0, y: 0.5, z: 0}
   galaxyBaseScale: 0.2
+  galaxyMinScale: 0.003
   galaxyOffset: {x: 0, y: 0.2, z: 0}
   galaxy: {fileID: 395848967}
 --- !u!4 &302076162

@@ -1,5 +1,6 @@
 using System;
 using System.Security.Cryptography;
+using TMPro;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -10,9 +11,12 @@ public class Star : MonoBehaviour
 {
     public String sceneName = "Room1";
     public XRGrabInteractable _grabInteractable;
+    public GameObject label;
+    [HideInInspector] public TextMeshProUGUI labelText;
     private int _originalLayerMask;
     private Vector3 _basePosition;
     private bool _selected = false;
+    [HideInInspector] public GalaxyArm galaxyArm;
     
     
     void Start()
@@ -20,9 +24,14 @@ public class Star : MonoBehaviour
         
         _grabInteractable = GetComponent<XRGrabInteractable>();
         _grabInteractable.activated.AddListener(OnActivated);
+        _grabInteractable.hoverEntered.AddListener(OnHoverEnter);
+        _grabInteractable.hoverExited.AddListener(OnHoverExit);
         _originalLayerMask = _grabInteractable.interactionLayers;
         _basePosition = transform.localPosition;
-        sceneName = "Room" + UnityEngine.Random.Range(1,10);;
+        labelText = label.GetComponentInChildren<TextMeshProUGUI>();
+        sceneName = "Room" + UnityEngine.Random.Range(1,10);
+        labelText.text = sceneName;
+        
     }
 
     // Update is called once per frame
@@ -64,7 +73,35 @@ public class Star : MonoBehaviour
         _grabInteractable.interactionManager.SelectExit(interactor, _grabInteractable);
         
         _basePosition = transform.localPosition;
+        if (galaxyArm)
+        {
+            galaxyArm.StarHoverExit();
+            galaxyArm.RemoveStar(this.gameObject);
+            galaxyArm = null;
+        }
+        
     }
+
+    private void OnHoverEnter(HoverEnterEventArgs args)
+    {
+        label.gameObject.SetActive(true);
+        if (galaxyArm != null)
+        {
+            galaxyArm.StarHoverEnter();
+        }
+        
+    }
+    
+    private void OnHoverExit(HoverExitEventArgs args)
+    {
+        label.gameObject.SetActive(false);
+        if (galaxyArm != null)
+        {
+            galaxyArm.StarHoverExit();
+        }
+        
+    }
+
     
     private void OnTriggerEnter(Collider other)
     {

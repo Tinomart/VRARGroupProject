@@ -24,6 +24,7 @@ public class Galaxy : MonoBehaviour
             if (obj.TryGetComponent<GalaxyArm>(out var arm))
             {
                 // Yes, this GameObject contains a GalaxyArm component
+                arm.armName = "Arm " + i;
                 arm.Setup();
             }
             obj.transform.SetParent(transform);
