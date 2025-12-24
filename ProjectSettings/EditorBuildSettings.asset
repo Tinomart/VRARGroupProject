@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/GalaxyUI/Scenes/GalaxyUI.unity
     guid: 6b4c71171afa5af4f87f9ca67e5e38b6
   - enabled: 1
+    path: Assets/GalaxyUI/Scenes/Tutorial.unity
+    guid: 98e5c6c5dbc050e4db3428f0bb63cef4
+  - enabled: 1
     path: Assets/GalaxyUI/Scenes/ExampleRooms/Room1/Room1.unity
     guid: ee6f8e8ba4b93564d9eaa7ff2a87dd45
   - enabled: 1

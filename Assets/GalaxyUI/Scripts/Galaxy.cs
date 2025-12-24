@@ -12,12 +12,14 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class Galaxy : MonoBehaviour
 {
+    public static GameObject Instance;
     public int numOfArms = 15;
     public GameObject armPrefeb;
     public List<GameObject> arms = new List<GameObject>();
 
     private void Awake()
     {
+        Instance = gameObject;
         for (int i = 0; i < numOfArms; i++)
         {
             GameObject obj = Instantiate(armPrefeb);

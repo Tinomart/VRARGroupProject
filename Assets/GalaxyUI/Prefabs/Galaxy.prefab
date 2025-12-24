@@ -260,9 +260,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2246018417900714487}
     m_Modifications:
+    - target: {fileID: 1335933078439970700, guid: 092623852845eea40ba3203c149c65f2, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6436968203927271575, guid: 092623852845eea40ba3203c149c65f2, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7973915629106477781, guid: 092623852845eea40ba3203c149c65f2, type: 3}
       propertyPath: m_Name
       value: BlackHole
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973915629106477781, guid: 092623852845eea40ba3203c149c65f2, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8692645709063350453, guid: 092623852845eea40ba3203c149c65f2, type: 3}
       propertyPath: m_LocalPosition.x
