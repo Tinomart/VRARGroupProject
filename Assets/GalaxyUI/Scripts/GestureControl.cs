@@ -25,6 +25,7 @@ public class GestureControl : MonoBehaviour
     void Start()
     {
         galaxyGrabInteractable = galaxy.GetComponent<XRGrabInteractable>();
+        Galaxy.Instance = galaxy;
     }
     
     private void OnTriggerEnter(Collider other)

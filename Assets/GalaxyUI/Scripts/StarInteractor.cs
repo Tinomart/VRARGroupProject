@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class StarInteractor : MonoBehaviour
 {
     [SerializeField]
-    private String startingSceneName = "Room1";
+    private String startingSceneName = "Tutorial";
     private String galaxyUISceneName = "GalaxyUI";
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,22 +23,7 @@ public class StarInteractor : MonoBehaviour
     {
         
     }
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.gameObject.name);
-        if (other.gameObject.TryGetComponent<Star>(out Star star))
-        {
-            if (star._grabInteractable.isSelected)
-            {
-                Debug.Log("Selected");
-                Location location = _locations[star.locationIndex];
-                location.Enter();
-            }
-            
-        }
-    }
-    */
+    
     public void SceneTransition(String sceneName)
     {
         UnloadAllAndLoad(sceneName);
