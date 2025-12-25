@@ -25,30 +25,30 @@ public class StarInteractionTutorial : TutorialStep
         leftHandInteractor = Player.LeftHand.GetComponentInChildren<XRDirectInteractor>();
         rightHandInteractor = Player.RightHand.GetComponentInChildren<XRDirectInteractor>();
         
+        yield return new WaitForSeconds(1f);
+        Player.SendHapticsToHand(true);
         hoverPrompt.gameObject.SetActive(true);
         yield return new WaitUntil(PlayerHoveringStar);
         hoverPrompt.gameObject.SetActive(false);
         
+        yield return new WaitForSeconds(1f);
+        Player.SendHapticsToHand(true);
         movePrompt.gameObject.SetActive(true);
         yield return new WaitUntil(PlayerMovedStar);
         movePrompt.gameObject.SetActive(false);
-        
-        movePrompt.gameObject.SetActive(true);
-        yield return new WaitUntil(PlayerMovedStar);
-        movePrompt.gameObject.SetActive(false);
-        
+        Player.SendHapticsToHand(true);
         releasePrompt.gameObject.SetActive(true);
         yield return new WaitUntil(PlayerReleasedStar);
         releasePrompt.gameObject.SetActive(false);
         
-        releasePrompt.gameObject.SetActive(true);
-        yield return new WaitUntil(PlayerReleasedStar);
-        releasePrompt.gameObject.SetActive(false);
-        
+        yield return new WaitForSeconds(1f);
+        Player.SendHapticsToHand(true);
         activatePrompt.gameObject.SetActive(true);
         yield return new WaitUntil(PlayerActivatedStar);
         activatePrompt.gameObject.SetActive(false);
         
+        yield return new WaitForSeconds(1f);
+        Player.SendHapticsToHand(true);
         sceneSwitchPrompt.gameObject.SetActive(true);
     }
 

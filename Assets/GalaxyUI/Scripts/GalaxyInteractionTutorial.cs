@@ -19,32 +19,46 @@ public class GalaxyInteractionTutorial : TutorialStep
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override IEnumerator TutorialSequence()
     {
+        yield return new WaitForSeconds(1f);
+        Player.SendHapticsToHand(true);
         spawnPrompt.gameObject.SetActive(true);
         yield return new WaitUntil(() => Galaxy.Instance.activeInHierarchy);
         spawnPrompt.gameObject.SetActive(false);
         
+        yield return new WaitForSeconds(1f);
+        Player.SendHapticsToHand(true);
         _galaxySpawnHeight = Galaxy.Instance.transform.position.y;
         movePrompt.gameObject.SetActive(true);
         yield return new WaitUntil(() => GalaxyMovedOutOfSky());
         movePrompt.gameObject.SetActive(false);
         
+        yield return new WaitForSeconds(1f);
+        Player.SendHapticsToHand(true);
         gestureDespawnPrompt.gameObject.SetActive(true);
         yield return new WaitUntil(() => !Galaxy.Instance.activeInHierarchy);
         gestureDespawnPrompt.gameObject.SetActive(false);
         
+        yield return new WaitForSeconds(1f);
+        Player.SendHapticsToHand(true);
         respawnPrompt.gameObject.SetActive(true);
         yield return new WaitUntil(() => Galaxy.Instance.activeInHierarchy);
         respawnPrompt.gameObject.SetActive(false);
         
+        yield return new WaitForSeconds(1f);
+        Player.SendHapticsToHand(false);
         _galaxySpawnScale = Galaxy.Instance.transform.localScale.y;
         rescalePrompt.gameObject.SetActive(true);
         yield return new WaitUntil(() => GalaxyRescaled());
         rescalePrompt.gameObject.SetActive(false);
         
+        yield return new WaitForSeconds(1f);
+        Player.SendHapticsToHand(false);
         scaleDespawnPrompt.gameObject.SetActive(true);
         yield return new WaitUntil(() => !Galaxy.Instance.activeInHierarchy);
         scaleDespawnPrompt.gameObject.SetActive(false);
         
+        yield return new WaitForSeconds(1f);
+        Player.SendHapticsToHand(true);
         respawnPrompt.gameObject.SetActive(true);
         yield return new WaitUntil(() => Galaxy.Instance.activeInHierarchy);
         respawnPrompt.gameObject.SetActive(false);
