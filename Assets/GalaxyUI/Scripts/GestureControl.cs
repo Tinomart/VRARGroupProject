@@ -18,12 +18,26 @@ public class GestureControl : MonoBehaviour
     [SerializeField] private Vector3 galaxyOffset = new Vector3(0f, 0.5f, 0f);
     public GameObject galaxy;
     private XRGrabInteractable galaxyGrabInteractable;
+    private XRDirectInteractor leftHandGrabInteractor;
+    private XRDirectInteractor rightHandGrabInteractor;
+    private bool isLeftHandHovering = false;
+    private bool isRightHandHovering = false;
     
     
     private List<XRDirectInteractor> _interactors = new List<XRDirectInteractor>();
 
     void Start()
     {
+        leftHandGrabInteractor = Player.LeftHand.GetComponentInChildren<XRDirectInteractor>();
+        rightHandGrabInteractor = Player.RightHand.GetComponentInChildren<XRDirectInteractor>();
+        if (leftHandGrabInteractor == null)
+        {
+            Debug.LogError("Left Hand Interactor not found.");
+        }
+        if (rightHandGrabInteractor == null)
+        {
+            Debug.LogError("Right Hand Interactor not found.");
+        }
         galaxyGrabInteractable = galaxy.GetComponent<XRGrabInteractable>();
         Galaxy.Instance = galaxy;
     }
@@ -57,18 +71,36 @@ public class GestureControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateHoveringHands();
         transform.position = playerCamera.transform.position + offset;
         if (PlayerLookingAtSky())
         {
+            
             if (_interactors.Count > 0)
             {
-                var grabInteractor = _interactors[0];
-                
-                if (grabInteractor.logicalSelectState.active)
+                foreach (XRDirectInteractor grabInteractor in _interactors)
                 {
-                    SpawnGalaxy(grabInteractor);
+                    if (grabInteractor.logicalSelectState.active)
+                    {
+                        SpawnGalaxy(grabInteractor);
+                    }
+                }
+                
+                    
+            }
+
+            if (!galaxy.activeInHierarchy)
+            {
+                if (isRightHandHovering)
+                {
+                    Player.SendHapticsToHand(true);
+                }
+                if (isLeftHandHovering)
+                {
+                    Player.SendHapticsToHand(false);
                 }
             }
+                
         }
 
         if (galaxy.transform.localScale.x < galaxyMinScale)
@@ -78,7 +110,11 @@ public class GestureControl : MonoBehaviour
                 DespawnGalaxy();
             }
             
-        } 
+        }
+        
+
+        
+        
     }
     
     private void SpawnGalaxy(XRDirectInteractor grabInteractor)
@@ -106,8 +142,38 @@ public class GestureControl : MonoBehaviour
 
     private bool PlayerLookingAtSky()
     {
-        return Physics.Raycast(playerCamera.transform.position,
+        Physics.Raycast(playerCamera.transform.position,
             playerCamera.transform.forward,
             out RaycastHit hit);
+        if (hit.collider)
+        {
+            hit.collider.gameObject.TryGetComponent<GestureControl>(out var gestureControl);
+            if (gestureControl)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    private void UpdateHoveringHands()
+    {
+        isLeftHandHovering = false;
+        isRightHandHovering = false;
+        if (_interactors.Count > 0)
+        {
+            foreach (XRDirectInteractor grabInteractor in _interactors)
+            {
+                if (grabInteractor == leftHandGrabInteractor)
+                {
+                    isLeftHandHovering = true;
+                }
+                if (grabInteractor == rightHandGrabInteractor)
+                {
+                    isRightHandHovering = true;
+                }
+            }
+        }
     }
 }

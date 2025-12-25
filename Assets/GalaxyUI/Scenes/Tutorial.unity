@@ -189,7 +189,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pull a star to your chest to travel to it. \nThis will close the tutorial"
+  m_text: "Pull a star to your chest to travel to it. \nThis will close the tutorial."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -608,7 +608,7 @@ MonoBehaviour:
   releasePrompt: {fileID: 1947631783}
   activatePrompt: {fileID: 578059259}
   sceneSwitchPrompt: {fileID: 16363837}
-  minimumStarMoveDistance: 0.1
+  minimumStarMoveDistance: 0.03
 --- !u!1 &459463183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Grab the Galaxy with both hands to rotate and rescale it.
+  m_text: 'Grab the Galaxy with both hands to rescale it.
 
 '
   m_isRightToLeft: 0
@@ -3154,9 +3154,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Release the Star and it will go back
+  m_text: 'Release the Star and it moves back
 
-    to its original position.'
+    to its home position.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3456,7 +3456,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Move the Galaxy out of the Sky while grabbing!
+  m_text: Move the Galaxy out of the Sky while grabbing.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
