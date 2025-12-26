@@ -8,9 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class StarInteractor : MonoBehaviour
 {
-    [SerializeField]
-    private String startingSceneName = "Tutorial";
+    [SerializeField] private String startingSceneName = "Tutorial";
     private String galaxyUISceneName = "GalaxyUI";
+    [SerializeField] private float starTravelDelay = 0.5f;
+    private bool starTravelling = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +27,21 @@ public class StarInteractor : MonoBehaviour
     
     public void SceneTransition(String sceneName)
     {
+        if (!starTravelling)
+        {
+            StartCoroutine(StartStarTravel(sceneName));
+        }
+        
+
+    }
+
+    IEnumerator StartStarTravel(String sceneName)
+    {
+        starTravelling = true;
+        AudioManager.StarTravelSource.Play();
+        yield return new WaitForSeconds(starTravelDelay);
         UnloadAllAndLoad(sceneName);
+        starTravelling = false;
     }
     
     public void UnloadAllAndLoad(string sceneName)

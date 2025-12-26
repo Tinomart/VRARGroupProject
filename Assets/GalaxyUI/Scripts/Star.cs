@@ -15,10 +15,8 @@ public class Star : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI labelText;
     private int _originalLayerMask;
     private Vector3 _basePosition;
-    private bool _selected = false;
     [HideInInspector] public GalaxyArm galaxyArm;
-    
-    
+
     void Start()
     {
         
@@ -31,19 +29,15 @@ public class Star : MonoBehaviour
         labelText = label.GetComponentInChildren<TextMeshProUGUI>();
         sceneName = "Room" + UnityEngine.Random.Range(1,10);
         labelText.text = sceneName;
-        
+        AudioManager.PlayAudioFrom(AudioManager.StarAmbienceSource, gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_selected != _grabInteractable.isSelected)
+        if (!_grabInteractable.isSelected)
         {
-            if (!_grabInteractable.isSelected){
-                transform.localPosition = _basePosition;
-            }
-            
-            _selected = _grabInteractable.isSelected;
+            transform.localPosition = _basePosition;
         }
 
         //transform.localScale = _baseScale;
@@ -79,6 +73,7 @@ public class Star : MonoBehaviour
             galaxyArm.RemoveStar(this.gameObject);
             galaxyArm = null;
         }
+        AudioManager.StarActivateSource.Play();
         
     }
 
