@@ -25,7 +25,6 @@ public class Galaxy : MonoBehaviour
             GameObject obj = Instantiate(armPrefeb);
             if (obj.TryGetComponent<GalaxyArm>(out var arm))
             {
-                // Yes, this GameObject contains a GalaxyArm component
                 arm.armName = "Arm " + i;
                 arm.Setup();
             }
@@ -35,9 +34,7 @@ public class Galaxy : MonoBehaviour
             arms[i].transform.localRotation = Quaternion.Euler(Vector3.zero);
             arms[i].transform.Rotate(0, (360/numOfArms)*i, 0);
         }   
-        
+        AudioManager.PlayAudioFrom(AudioManager.GalaxyAmbienceSource, gameObject);
     }
-
-    
 }
 

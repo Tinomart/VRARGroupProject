@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -16,12 +18,14 @@ public class GestureControl : MonoBehaviour
     [SerializeField] private float galaxyBaseScale = 0.2f;
     [SerializeField] private float galaxyMinScale = 0.002f;
     [SerializeField] private Vector3 galaxyOffset = new Vector3(0f, 0.5f, 0f);
+    [SerializeField] private float galaxySpawnDelay = 1;
     public GameObject galaxy;
     private XRGrabInteractable galaxyGrabInteractable;
     private XRDirectInteractor leftHandGrabInteractor;
     private XRDirectInteractor rightHandGrabInteractor;
     private bool isLeftHandHovering = false;
     private bool isRightHandHovering = false;
+    private bool galaxySpawnStarted = false;
     
     
     private List<XRDirectInteractor> _interactors = new List<XRDirectInteractor>();
@@ -93,11 +97,11 @@ public class GestureControl : MonoBehaviour
             {
                 if (isRightHandHovering)
                 {
-                    Player.SendHapticsToHand(true);
+                    Player.SendHapticsToHand(true, 0.1f);
                 }
                 if (isLeftHandHovering)
                 {
-                    Player.SendHapticsToHand(false);
+                    Player.SendHapticsToHand(false, 0.1f);
                 }
             }
                 
@@ -119,23 +123,32 @@ public class GestureControl : MonoBehaviour
     
     private void SpawnGalaxy(XRDirectInteractor grabInteractor)
     {
-        if (!galaxy.activeInHierarchy)
+        if (!galaxy.activeInHierarchy && !galaxySpawnStarted)
         {
-            galaxy.SetActive(true);
-            galaxy.transform.position = grabInteractor.transform.position + galaxyOffset;
-            galaxy.transform.rotation = Quaternion.Euler(Vector3.zero);
-            galaxy.transform.localScale = new Vector3(galaxyBaseScale, galaxyBaseScale, galaxyBaseScale);
-            XRInteractionManager interactionManager = grabInteractor.interactionManager;
-            
-            interactionManager.SelectEnter((IXRSelectInteractor)grabInteractor, galaxyGrabInteractable);
+            StartCoroutine(StartGalaxySpawn(grabInteractor));
         }
         
+    }
+    
+    IEnumerator StartGalaxySpawn(XRDirectInteractor grabInteractor)
+    {
+        galaxySpawnStarted = true;
+        AudioManager.GalaxySpawnSource.Play();
+        yield return new WaitForSeconds(galaxySpawnDelay);
+        galaxy.SetActive(true);
+        galaxy.transform.position = grabInteractor.transform.position + galaxyOffset;
+        galaxy.transform.rotation = Quaternion.Euler(Vector3.zero);
+        galaxy.transform.localScale = new Vector3(galaxyBaseScale, galaxyBaseScale, galaxyBaseScale);
+        XRInteractionManager interactionManager = grabInteractor.interactionManager;
+        interactionManager.SelectEnter((IXRSelectInteractor)grabInteractor, galaxyGrabInteractable);
+        galaxySpawnStarted = false;
     }
     
     private void DespawnGalaxy()
     {
         if (galaxy.activeInHierarchy)
         {
+            AudioManager.GalaxyDespawnSource.Play();
             galaxy.SetActive(false);
         }
     }
