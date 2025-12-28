@@ -26,13 +26,13 @@ public class Galaxy : MonoBehaviour
             if (obj.TryGetComponent<GalaxyArm>(out var arm))
             {
                 arm.armName = "Arm " + i;
-                arm.Setup();
             }
             obj.transform.SetParent(transform);
             arms.Add(obj);
             arms[i].transform.localPosition = Vector3.zero;
             arms[i].transform.localRotation = Quaternion.Euler(Vector3.zero);
             arms[i].transform.Rotate(0, (360/numOfArms)*i, 0);
+            arm.Setup();
         }   
         AudioManager.PlayAudioFrom(AudioManager.GalaxyAmbienceSource, gameObject);
     }

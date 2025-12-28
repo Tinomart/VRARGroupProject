@@ -305,7 +305,9 @@ MonoBehaviour:
   galaxyBaseScale: 0.2
   galaxyMinScale: 0.003
   galaxyOffset: {x: 0, y: 0.2, z: 0}
-  galaxySpawnDelay: 0.5
+  galaxySpawnDelay: 0.2
+  galaxySpawnStart: {x: 0, y: 500, z: 0}
+  galaxySpawnSpeed: 15
   galaxy: {fileID: 395848967}
 --- !u!4 &302076162
 Transform:

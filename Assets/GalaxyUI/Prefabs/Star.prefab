@@ -765,7 +765,10 @@ MonoBehaviour:
   sceneName: Room1
   _grabInteractable: {fileID: 0}
   label: {fileID: 2055770151625970651}
+  returnSpeed: 50
   labelText: {fileID: 0}
+  basePosition: {x: 0, y: 0, z: 0}
+  galaxyArm: {fileID: 0}
 --- !u!54 &4803563292902699363
 Rigidbody:
   m_ObjectHideFlags: 0
