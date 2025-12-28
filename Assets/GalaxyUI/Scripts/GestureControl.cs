@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +9,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public class GestureControl : MonoBehaviour
 {
@@ -18,7 +21,10 @@ public class GestureControl : MonoBehaviour
     [SerializeField] private float galaxyBaseScale = 0.2f;
     [SerializeField] private float galaxyMinScale = 0.002f;
     [SerializeField] private Vector3 galaxyOffset = new Vector3(0f, 0.5f, 0f);
-    [SerializeField] private float galaxySpawnDelay = 1;
+    [SerializeField] private float galaxySpawnDelay = 0.5f;
+    [SerializeField] private Vector3 galaxySpawnStart = new Vector3(0f, 500, 0f);
+    [SerializeField] private float galaxySpawnSpeed = 100f;
+    [SerializeField] AnimationCurve GalaxyDespawnCurve;
     public GameObject galaxy;
     private XRGrabInteractable galaxyGrabInteractable;
     private XRDirectInteractor leftHandGrabInteractor;
@@ -26,6 +32,10 @@ public class GestureControl : MonoBehaviour
     private bool isLeftHandHovering = false;
     private bool isRightHandHovering = false;
     private bool galaxySpawnStarted = false;
+    private bool galaxyDespawnStarted = false;
+    private bool galaxyFlyDownStarted = false;
+    private bool galaxyFlyUpStarted = false;
+    private XRDirectInteractor galaxySpawnInteractor;
     
     
     private List<XRDirectInteractor> _interactors = new List<XRDirectInteractor>();
@@ -48,14 +58,20 @@ public class GestureControl : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.TryGetComponent(out XRDirectInteractor grabInteractor))
         {
             _interactors.Add(grabInteractor);
-            if (grabInteractor.hasSelection)
+            if (!galaxyDespawnStarted)
             {
-                IXRSelectInteractable selectedInteractable = grabInteractor.interactablesSelected[0];
-                if ((XRGrabInteractable)selectedInteractable == galaxyGrabInteractable){
-                    DespawnGalaxy();
+                if (grabInteractor.hasSelection)
+                {
+                    IXRSelectInteractable selectedInteractable = grabInteractor.interactablesSelected[0];
+                    if ((XRGrabInteractable)selectedInteractable == galaxyGrabInteractable)
+                    {
+                        galaxySpawnInteractor = grabInteractor;
+                        StartCoroutine(DespawnGalaxyGesture(grabInteractor));
+                    }
                 }
             }
         }
@@ -79,13 +95,13 @@ public class GestureControl : MonoBehaviour
         transform.position = playerCamera.transform.position + offset;
         if (PlayerLookingAtSky())
         {
-            
             if (_interactors.Count > 0)
             {
                 foreach (XRDirectInteractor grabInteractor in _interactors)
                 {
                     if (grabInteractor.logicalSelectState.active)
                     {
+                        galaxySpawnInteractor = grabInteractor;
                         SpawnGalaxy(grabInteractor);
                     }
                 }
@@ -111,12 +127,37 @@ public class GestureControl : MonoBehaviour
         {
             if (!galaxyGrabInteractable.isSelected)
             {
-                DespawnGalaxy();
+                DespawnGalaxyScale();
             }
             
         }
-        
 
+        if (galaxyFlyDownStarted)
+        {
+            float distance = Vector3.Distance(galaxy.transform.position, galaxySpawnInteractor.transform.position + galaxyOffset);
+            float step = galaxySpawnSpeed * Time.deltaTime*distance;
+            if (distance < galaxySpawnStart.magnitude/5000)
+            {
+                galaxyFlyDownStarted = false;
+            }
+            else
+            {
+                galaxy.transform.position = Vector3.MoveTowards(galaxy.transform.position, galaxySpawnInteractor.transform.position + galaxyOffset, step);
+            }
+        } else if (galaxyFlyUpStarted)
+        {
+            float distance = Vector3.Distance(galaxy.transform.position, galaxySpawnInteractor.transform.position + galaxySpawnStart);
+            float step = galaxySpawnSpeed * galaxySpawnStart.magnitude*15 * Time.deltaTime/distance;
+            if (distance < step
+                 || distance < galaxySpawnStart.magnitude/5)
+            {
+                galaxyFlyUpStarted = false;
+            }
+            else
+            {
+                galaxy.transform.position = Vector3.MoveTowards(galaxy.transform.position, galaxySpawnInteractor.transform.position + galaxySpawnStart, step);
+            }
+        }
         
         
     }
@@ -135,22 +176,45 @@ public class GestureControl : MonoBehaviour
         galaxySpawnStarted = true;
         AudioManager.GalaxySpawnSource.Play();
         yield return new WaitForSeconds(galaxySpawnDelay);
+        
         galaxy.SetActive(true);
-        galaxy.transform.position = grabInteractor.transform.position + galaxyOffset;
+        galaxy.transform.position = grabInteractor.transform.position + galaxySpawnStart;
         galaxy.transform.rotation = Quaternion.Euler(Vector3.zero);
         galaxy.transform.localScale = new Vector3(galaxyBaseScale, galaxyBaseScale, galaxyBaseScale);
+        galaxyFlyDownStarted = true;
+        
+        yield return new WaitUntil(() => !galaxyFlyDownStarted);
         XRInteractionManager interactionManager = grabInteractor.interactionManager;
         interactionManager.SelectEnter((IXRSelectInteractor)grabInteractor, galaxyGrabInteractable);
         galaxySpawnStarted = false;
     }
-    
-    private void DespawnGalaxy()
+
+    private void DespawnGalaxyScale()
     {
         if (galaxy.activeInHierarchy)
         {
             AudioManager.GalaxyDespawnSource.Play();
             galaxy.SetActive(false);
         }
+    }
+    
+    IEnumerator DespawnGalaxyGesture(XRDirectInteractor grabInteractor)
+    {
+        if (galaxy.activeInHierarchy)
+        {
+            XRInteractionManager interactionManager = grabInteractor.interactionManager;
+            interactionManager.SelectExit((IXRSelectInteractor)grabInteractor, galaxyGrabInteractable);
+            AudioManager.GalaxyDespawnSource.Play();
+            galaxyDespawnStarted = true;
+            
+            galaxyFlyUpStarted = true;
+        
+            yield return new WaitUntil(() => !galaxyFlyUpStarted);
+            galaxy.SetActive(false);
+            galaxyDespawnStarted = false;
+            
+        }
+        yield return null;
     }
 
     private bool PlayerLookingAtSky()

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
@@ -12,37 +13,62 @@ public class Star : MonoBehaviour
     public String sceneName = "Room1";
     public XRGrabInteractable _grabInteractable;
     public GameObject label;
+    [SerializeField] private float returnSpeed = 0.1f;
     [HideInInspector] public TextMeshProUGUI labelText;
     private int _originalLayerMask;
-    private Vector3 _basePosition;
-    [HideInInspector] public GalaxyArm galaxyArm;
+    [HideInInspector] public Vector3 basePosition;
+    private Vector3 _baseGlobalPosition;
+    private GalaxyArm galaxyArm;
+    [HideInInspector] public GalaxyArm currentGalaxyArm;
+    [HideInInspector] public int currentGalaxyArmIndex = 0;
+    [HideInInspector] public bool processingcurrentGalaxyArm = false;
 
     void Start()
     {
-        
         _grabInteractable = GetComponent<XRGrabInteractable>();
         _grabInteractable.activated.AddListener(OnActivated);
+        _grabInteractable.selectExited.AddListener(OnSelectExit);
         _grabInteractable.hoverEntered.AddListener(OnHoverEnter);
         _grabInteractable.hoverExited.AddListener(OnHoverExit);
         _originalLayerMask = _grabInteractable.interactionLayers;
-        _basePosition = transform.localPosition;
         labelText = label.GetComponentInChildren<TextMeshProUGUI>();
         sceneName = "Room" + UnityEngine.Random.Range(1,10);
         labelText.text = sceneName;
         AudioManager.PlayAudioFrom(AudioManager.StarAmbienceSource, gameObject);
     }
 
+    public void InitializeGalaxyArm(GalaxyArm newGalaxyArm)
+    {
+        galaxyArm = newGalaxyArm;
+        currentGalaxyArm = galaxyArm;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        
         if (!_grabInteractable.isSelected)
         {
-            transform.localPosition = _basePosition;
+            _baseGlobalPosition = transform.position;
+            
+            transform.localPosition = Vector3.Lerp(transform.localPosition, basePosition, returnSpeed * Time.deltaTime);
         }
-
-        //transform.localScale = _baseScale;
-        //transform.localPosition = _basePosition;
-
+        else
+        {
+            if (galaxyArm)
+            {
+                if (galaxyArm.CalculateMinimumDistance(transform) > galaxyArm.CalculateRelativeGalaxyLeaveDistance())
+                {
+                    if (currentGalaxyArm == galaxyArm)
+                    {
+                        RemoveCurrentGalaxyArm();
+                    }
+                } else
+                {
+                    ChangeCurrentGalaxyArm(galaxyArm);
+                }
+            }
+        }
     }
     
     public void SetPassPriority(bool pass)
@@ -64,15 +90,21 @@ public class Star : MonoBehaviour
         var interactor = _grabInteractable.interactorsSelecting[0] as IXRSelectInteractor;
             
         // Tell the interaction manager to deselect
-        _grabInteractable.interactionManager.SelectExit(interactor, _grabInteractable);
         
-        _basePosition = transform.localPosition;
-        if (galaxyArm)
+        
+        if(currentGalaxyArm == null)
         {
             galaxyArm.StarHoverExit();
-            galaxyArm.RemoveStar(this.gameObject);
             galaxyArm = null;
+            basePosition = Galaxy.Instance.transform.InverseTransformPoint(transform.position);
         }
+        else if (currentGalaxyArm != galaxyArm)
+        {
+            galaxyArm = currentGalaxyArm;
+            currentGalaxyArm.StarHoverExit();
+        }
+        
+        _grabInteractable.interactionManager.SelectExit(interactor, _grabInteractable);
         AudioManager.StarActivateSource.Play();
         
     }
@@ -80,9 +112,9 @@ public class Star : MonoBehaviour
     private void OnHoverEnter(HoverEnterEventArgs args)
     {
         label.gameObject.SetActive(true);
-        if (galaxyArm != null)
+        if (currentGalaxyArm != null)
         {
-            galaxyArm.StarHoverEnter();
+            currentGalaxyArm.StarHoverEnter();
         }
         
     }
@@ -90,13 +122,28 @@ public class Star : MonoBehaviour
     private void OnHoverExit(HoverExitEventArgs args)
     {
         label.gameObject.SetActive(false);
+        if (currentGalaxyArm != null)
+        {
+            currentGalaxyArm.StarHoverExit();
+        }
         if (galaxyArm != null)
         {
-            galaxyArm.StarHoverExit();
+            if (galaxyArm != currentGalaxyArm)
+            {
+                galaxyArm.StarHoverExit();
+            }
         }
+
         
     }
 
+    private void OnSelectExit(SelectExitEventArgs args)
+    {
+        if (galaxyArm)
+        {
+            ChangeCurrentGalaxyArm(galaxyArm);
+        }
+    }
     
     private void OnTriggerEnter(Collider other)
     {
@@ -107,6 +154,55 @@ public class Star : MonoBehaviour
                 starInteractor.SceneTransition(sceneName);
             }
             
+        }
+        if (other.gameObject.TryGetComponent(out GalaxyArm galaxyArm))
+        {
+            galaxyArm.collidingStars.Add(this);
+        }
+        
+    }
+
+    public void RemoveCurrentGalaxyArm()
+    {
+        if (currentGalaxyArm && !processingcurrentGalaxyArm)
+        {
+            currentGalaxyArm.RemoveStar(gameObject);
+            currentGalaxyArm.StarHoverExit();
+        }
+
+        currentGalaxyArm = null;
+
+    }
+    public void ChangeCurrentGalaxyArm(GalaxyArm newGalaxyArm, bool indexSetManually = false)
+    {
+        
+        
+        if (!processingcurrentGalaxyArm)
+        {
+            if (!(currentGalaxyArm == newGalaxyArm))
+            {
+                if (currentGalaxyArm)
+                {
+                    currentGalaxyArm.RemoveStar(gameObject, indexSetManually); 
+                    currentGalaxyArm.StarHoverExit();
+                }
+                currentGalaxyArm = newGalaxyArm;
+                currentGalaxyArm.AddStar(gameObject, currentGalaxyArmIndex);
+            }
+            if (!galaxyArm)
+            {
+                galaxyArm = newGalaxyArm;
+            }
+        }
+        
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out GalaxyArm galaxyArm))
+        {
+            galaxyArm.collidingStars.Remove(this);
         }
     }
 }
