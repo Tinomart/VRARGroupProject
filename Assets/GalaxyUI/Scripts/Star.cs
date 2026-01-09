@@ -22,6 +22,7 @@ public class Star : MonoBehaviour
     [HideInInspector] public GalaxyArm currentGalaxyArm;
     [HideInInspector] public int currentGalaxyArmIndex = 0;
     [HideInInspector] public bool processingcurrentGalaxyArm = false;
+    private GameObject mesh;
 
     void Start()
     {
@@ -32,9 +33,19 @@ public class Star : MonoBehaviour
         _grabInteractable.hoverExited.AddListener(OnHoverExit);
         _originalLayerMask = _grabInteractable.interactionLayers;
         labelText = label.GetComponentInChildren<TextMeshProUGUI>();
-        sceneName = "Room" + UnityEngine.Random.Range(1,10);
+        int roomNumber = UnityEngine.Random.Range(1, 10);
+        sceneName = "Room" + roomNumber.ToString();
         labelText.text = sceneName;
         AudioManager.PlayAudioFrom(AudioManager.StarAmbienceSource, gameObject);
+        //mesh = GameObject.Find("Sphere");
+        
+        //mesh = transform.Find("Sphere");
+        
+        MeshRenderer mr = GetComponentInChildren<MeshRenderer>();
+        GameObject mesh = mr.gameObject;
+        
+        //mesh.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
+        mesh.GetComponent<Renderer>().material.SetFloat("_roomNumber", roomNumber);
     }
 
     public void InitializeGalaxyArm(GalaxyArm newGalaxyArm)
