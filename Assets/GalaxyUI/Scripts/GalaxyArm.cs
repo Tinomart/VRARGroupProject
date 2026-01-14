@@ -21,6 +21,7 @@ public class GalaxyArm : MonoBehaviour
     public float spiralAngle = 2f;
     public float galaxyArmLeaveDistance = 0.1f;
     public Vector3 offset = new Vector3(1,0,0);
+    public float dustArmOffset = 0.5f;
     public float colliderRadius = 1f;
     
     public int starCount = 12;
@@ -300,9 +301,9 @@ public class GalaxyArm : MonoBehaviour
     
     public Vector3 CalculateDustPosition(float armPosition)
     {
-        float posX = ((float)Math.Cos(armPosition*spiralAngle/stars.Count) * armPosition*spiralRadius/stars.Count) + (UnityEngine.Random.Range(-positionRange, positionRange)/10);
+        float posX = ((float)Math.Cos((armPosition-dustArmOffset)*spiralAngle/stars.Count) * (armPosition-dustArmOffset)*spiralRadius/stars.Count) + (UnityEngine.Random.Range(-positionRange, positionRange)/10);
         float posY =  UnityEngine.Random.Range(-positionRange, positionRange)/10;
-        float posZ = ((float)Math.Sin(armPosition*spiralAngle/stars.Count) * armPosition*spiralRadius/stars.Count) + (UnityEngine.Random.Range(-positionRange, positionRange)/10);
+        float posZ = ((float)Math.Sin((armPosition-dustArmOffset)*spiralAngle/stars.Count) * (armPosition-dustArmOffset)*spiralRadius/stars.Count) + (UnityEngine.Random.Range(-positionRange, positionRange)/10);
         
         return new Vector3(posX, posY, posZ) + offset;
     }
