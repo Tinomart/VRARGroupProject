@@ -54,9 +54,10 @@ MonoBehaviour:
   spiralAngle: 2
   galaxyArmLeaveDistance: 1
   offset: {x: 2.25, y: 0, z: 0.5}
+  dustArmOffset: 0.5
   colliderRadius: 1
   starCount: 8
-  dustEmitterCount: 50
+  dustEmitterCount: 20
   starPrefab: {fileID: 6919565497558993047, guid: 298f15745f934ca4c9d8c4a835e35588, type: 3}
   dustGeneratorPrefab: {fileID: 3678515974030004575, guid: 6ff52146551e6c64c8f080e836026f9e, type: 3}
   label: {fileID: 1482179668936519111}
