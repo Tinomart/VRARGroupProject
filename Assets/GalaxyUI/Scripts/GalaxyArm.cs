@@ -5,25 +5,31 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using Random = System.Random;
 
 public class GalaxyArm : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [HideInInspector] public List<GameObject> stars = new List<GameObject>();
+    [HideInInspector] public List<GameObject> dust = new List<GameObject>();
     
     
     private List<Transform> starsTransforms = new List<Transform>();
     [HideInInspector] public List<Star> collidingStars = new List<Star>();
     public float spiralRadius = 12f;
+    public float positionRange = 1f;
     public float spiralAngle = 2f;
     public float galaxyArmLeaveDistance = 0.1f;
     public Vector3 offset = new Vector3(1,0,0);
+    public float dustArmOffset = 0.5f;
     public float colliderRadius = 1f;
     
     public int starCount = 12;
+    public int dustEmitterCount = 50;
     private int starHoverCount = 0;
     
     public GameObject starPrefab;
+    public GameObject dustGeneratorPrefab;
     public GameObject label;
     [HideInInspector]
     public TextMeshProUGUI labelText;
@@ -51,7 +57,7 @@ public class GalaxyArm : MonoBehaviour
         labelText = label.GetComponentInChildren<TextMeshProUGUI>();
         labelText.text = armName;
         
-        
+        CreateDust();
         StartCoroutine(UpdateColliderNextFrame());
         
 
@@ -59,10 +65,11 @@ public class GalaxyArm : MonoBehaviour
     
     public Vector3 CalculateCurvePosition(int starNumber)
     {
-        float posX = (float)Math.Cos(starNumber*spiralAngle/stars.Count) * starNumber*spiralRadius/stars.Count;
-        float posY = (float)Math.Sin(starNumber*spiralAngle/stars.Count) * starNumber*spiralRadius/stars.Count;
+        float posX = ((float)Math.Cos(starNumber*spiralAngle/stars.Count) * starNumber*spiralRadius/stars.Count) + UnityEngine.Random.Range(-positionRange, positionRange);
+        float posY =  UnityEngine.Random.Range(-positionRange, positionRange);
+        float posZ = ((float)Math.Sin(starNumber*spiralAngle/stars.Count) * starNumber*spiralRadius/stars.Count) + UnityEngine.Random.Range(-positionRange, positionRange);
         
-        return new Vector3(posX, 0, posY) + offset;
+        return new Vector3(posX, posY, posZ) + offset;
     }
 
     public void StarHoverEnter()
@@ -116,6 +123,7 @@ public class GalaxyArm : MonoBehaviour
     {
         yield return null; // Wait one frame
         RearrangeStars();
+        PositionDust();
         yield return null;
         BoxCollider collider = gameObject.AddComponent<BoxCollider>();
         collider.isTrigger = true;
@@ -289,5 +297,35 @@ public class GalaxyArm : MonoBehaviour
 
         
         return minimumDistance;
+    }
+    
+    public Vector3 CalculateDustPosition(float armPosition)
+    {
+        float posX = ((float)Math.Cos((armPosition-dustArmOffset)*spiralAngle/stars.Count) * (armPosition-dustArmOffset)*spiralRadius/stars.Count) + (UnityEngine.Random.Range(-positionRange, positionRange)/10);
+        float posY =  UnityEngine.Random.Range(-positionRange, positionRange)/10;
+        float posZ = ((float)Math.Sin((armPosition-dustArmOffset)*spiralAngle/stars.Count) * (armPosition-dustArmOffset)*spiralRadius/stars.Count) + (UnityEngine.Random.Range(-positionRange, positionRange)/10);
+        
+        return new Vector3(posX, posY, posZ) + offset;
+    }
+
+    void CreateDust()
+    {
+        for (int i = 0; i < dustEmitterCount; i++)
+        {
+            GameObject obj = Instantiate(dustGeneratorPrefab);
+            obj.transform.SetParent(Galaxy.Instance.transform);
+            dust.Add(obj);
+        }
+    }
+
+    void PositionDust()
+    {
+        int i = 0;
+        foreach (var emitter in dust)
+        {
+            //Debug.Log((float)stars.Count/(float)dustEmitterCount*(float)i);
+            emitter.transform.localPosition = Galaxy.Instance.transform.InverseTransformPoint(transform.TransformPoint(CalculateDustPosition(((float)stars.Count/(float)dustEmitterCount)*(float)i)));
+            i++;
+        }
     }
 }
