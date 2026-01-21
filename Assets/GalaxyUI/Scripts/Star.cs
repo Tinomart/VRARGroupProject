@@ -105,8 +105,11 @@ public class Star : MonoBehaviour
         
         if(currentGalaxyArm == null)
         {
-            galaxyArm.StarHoverExit();
-            galaxyArm = null;
+            if (galaxyArm)
+            {
+                galaxyArm.StarHoverExit();
+                galaxyArm = null;
+            }
             basePosition = Galaxy.Instance.transform.InverseTransformPoint(transform.position);
         }
         else if (currentGalaxyArm != galaxyArm)
@@ -205,8 +208,6 @@ public class Star : MonoBehaviour
                 galaxyArm = newGalaxyArm;
             }
         }
-        
-        
     }
 
     private void OnTriggerExit(Collider other)

@@ -323,10 +323,55 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7973915629106477781, guid: 092623852845eea40ba3203c149c65f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1461849446825142949}
+    - targetCorrespondingSourceObject: {fileID: 7973915629106477781, guid: 092623852845eea40ba3203c149c65f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1179524488958672858}
   m_SourcePrefab: {fileID: 100100000, guid: 092623852845eea40ba3203c149c65f2, type: 3}
 --- !u!4 &127026317904808347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8692645709063350453, guid: 092623852845eea40ba3203c149c65f2, type: 3}
   m_PrefabInstance: {fileID: 8746327975502078254}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1713682263688829947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7973915629106477781, guid: 092623852845eea40ba3203c149c65f2, type: 3}
+  m_PrefabInstance: {fileID: 8746327975502078254}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1461849446825142949
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713682263688829947}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1179524488958672858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713682263688829947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d44d16eaced284cbf99b212cff05db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlackHole
+  starPrefab: {fileID: 6919565497558993047, guid: 298f15745f934ca4c9d8c4a835e35588, type: 3}
