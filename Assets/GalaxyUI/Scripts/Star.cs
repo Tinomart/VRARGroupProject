@@ -13,6 +13,7 @@ public class Star : MonoBehaviour
     public String sceneName = "Room1";
     public XRGrabInteractable _grabInteractable;
     public GameObject label;
+    public const float HoverEffectStrength = 0.5f;
     [SerializeField] private float returnSpeed = 0.1f;
     [HideInInspector] public TextMeshProUGUI labelText;
     private int _originalLayerMask;
@@ -23,6 +24,9 @@ public class Star : MonoBehaviour
     [HideInInspector] public int currentGalaxyArmIndex = 0;
     [HideInInspector] public bool processingcurrentGalaxyArm = false;
     private GameObject mesh;
+    private Renderer meshRenderer;
+    private Color baseStarEffectStrength;
+    private int roomNumber;
 
     void Start()
     {
@@ -33,19 +37,16 @@ public class Star : MonoBehaviour
         _grabInteractable.hoverExited.AddListener(OnHoverExit);
         _originalLayerMask = _grabInteractable.interactionLayers;
         labelText = label.GetComponentInChildren<TextMeshProUGUI>();
-        int roomNumber = UnityEngine.Random.Range(1, 10);
+        roomNumber = UnityEngine.Random.Range(1, 10);
         sceneName = "Room" + roomNumber.ToString();
         labelText.text = sceneName;
         AudioManager.PlayAudioFrom(AudioManager.StarAmbienceSource, gameObject);
-        //mesh = GameObject.Find("Sphere");
-        
-        //mesh = transform.Find("Sphere");
         
         MeshRenderer mr = GetComponentInChildren<MeshRenderer>();
         GameObject mesh = mr.gameObject;
-        
-        //mesh.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
-        mesh.GetComponent<Renderer>().material.SetFloat("_roomNumber", roomNumber);
+        meshRenderer = mesh.GetComponent<Renderer>();
+        meshRenderer.material.SetFloat("_roomNumber", roomNumber);
+        baseStarEffectStrength = meshRenderer.material.GetVector("_StarEffectStrength");
     }
 
     public void InitializeGalaxyArm(GalaxyArm newGalaxyArm)
@@ -105,8 +106,11 @@ public class Star : MonoBehaviour
         
         if(currentGalaxyArm == null)
         {
-            galaxyArm.StarHoverExit();
-            galaxyArm = null;
+            if (galaxyArm)
+            {
+                galaxyArm.StarHoverExit();
+                galaxyArm = null;
+            }
             basePosition = Galaxy.Instance.transform.InverseTransformPoint(transform.position);
         }
         else if (currentGalaxyArm != galaxyArm)
@@ -215,5 +219,16 @@ public class Star : MonoBehaviour
         {
             galaxyArm.collidingStars.Remove(this);
         }
+    }
+
+    public void MainHoverEnter() 
+    {
+        float scale = transform.lossyScale.magnitude/ Mathf.Sqrt(3);
+        meshRenderer.material.SetVector("_StarEffectStrength", new Vector3(HoverEffectStrength/Mathf.Sqrt(scale), HoverEffectStrength/Mathf.Sqrt(scale), HoverEffectStrength/Mathf.Sqrt(scale)));
+    }
+
+    public void MainHoverExit()
+    {
+        meshRenderer.material.SetVector("_StarEffectStrength", baseStarEffectStrength);
     }
 }
