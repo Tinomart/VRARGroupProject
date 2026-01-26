@@ -267,5 +267,16 @@ public class Star : MonoBehaviour
     {
         meshRenderer.material.SetVector("_StarEffectStrength", baseStarEffectStrength);
     }
+
+    public void MainHoverEnter() 
+    {
+        float scale = transform.lossyScale.magnitude/ Mathf.Sqrt(3);
+        meshRenderer.material.SetVector("_StarEffectStrength", new Vector3(HoverEffectStrength/Mathf.Sqrt(scale), HoverEffectStrength/Mathf.Sqrt(scale), HoverEffectStrength/Mathf.Sqrt(scale)));
+    }
+
+    public void MainHoverExit()
+    {
+        meshRenderer.material.SetVector("_StarEffectStrength", baseStarEffectStrength);
+    }
 }
 
