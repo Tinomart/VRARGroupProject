@@ -64,15 +64,20 @@ public class GestureControl : MonoBehaviour
             _interactors.Add(grabInteractor);
             if (!galaxyDespawnStarted)
             {
-                if (grabInteractor.hasSelection)
+                Galaxy.Instance.TryGetComponent(out XRGrabInteractable galaxyInteractable);
+                if (galaxyInteractable.interactorsSelecting.Count < 2)
                 {
-                    IXRSelectInteractable selectedInteractable = grabInteractor.interactablesSelected[0];
-                    if ((XRGrabInteractable)selectedInteractable == galaxyGrabInteractable)
+                    if (grabInteractor.hasSelection)
                     {
-                        galaxySpawnInteractor = grabInteractor;
-                        StartCoroutine(DespawnGalaxyGesture(grabInteractor));
+                        IXRSelectInteractable selectedInteractable = grabInteractor.interactablesSelected[0];
+                        if ((XRGrabInteractable)selectedInteractable == galaxyGrabInteractable)
+                        {
+                            galaxySpawnInteractor = grabInteractor;
+                            StartCoroutine(DespawnGalaxyGesture(grabInteractor));
+                        }
                     }
                 }
+                
             }
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using TMPro;
@@ -23,6 +24,9 @@ public class Star : MonoBehaviour
     [HideInInspector] public int currentGalaxyArmIndex = 0;
     [HideInInspector] public bool processingcurrentGalaxyArm = false;
     private GameObject mesh;
+    [HideInInspector] public bool blackHoleStar = false;
+    [HideInInspector] public bool blackHoleCollision = false;
+    
 
     void Start()
     {
@@ -98,7 +102,16 @@ public class Star : MonoBehaviour
 
     private void OnActivated(ActivateEventArgs args)
     {
-        var interactor = _grabInteractable.interactorsSelecting[0] as IXRSelectInteractor;
+        XRDirectInteractor interactor = (XRDirectInteractor)args.interactorObject;
+        interactor.gameObject.TryGetComponent(out Collider col);
+        if (col)
+        {
+            if (col.bounds.Intersects(BlackHole.BlackHoleCollider.bounds))
+            {
+                return;
+            }
+        }
+        blackHoleCollision = false;
             
         // Tell the interaction manager to deselect
         
@@ -118,7 +131,7 @@ public class Star : MonoBehaviour
             currentGalaxyArm.StarHoverExit();
         }
         
-        _grabInteractable.interactionManager.SelectExit(interactor, _grabInteractable);
+        _grabInteractable.interactionManager.SelectExit((IXRSelectInteractor)interactor, _grabInteractable);
         AudioManager.StarActivateSource.Play();
         
     }
@@ -157,10 +170,19 @@ public class Star : MonoBehaviour
         {
             ChangeCurrentGalaxyArm(galaxyArm);
         }
+        if (blackHoleCollision)
+        {
+            RemoveStar();
+        }
     }
     
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.TryGetComponent(out BlackHole blackHole))
+        {
+            blackHoleCollision = true;
+                
+        }
         if (other.gameObject.TryGetComponent(out StarInteractor starInteractor))
         {
             if (_grabInteractable.isSelected)
@@ -173,6 +195,7 @@ public class Star : MonoBehaviour
         {
             galaxyArm.collidingStars.Add(this);
         }
+        
         
     }
 
@@ -216,5 +239,23 @@ public class Star : MonoBehaviour
         {
             galaxyArm.collidingStars.Remove(this);
         }
+        else if (other.gameObject.TryGetComponent(out BlackHole blackHole))
+        {
+            if (!blackHoleStar)
+            {
+                blackHoleCollision = false;
+            }
+            
+                
+        }
     }
+    public void  RemoveStar(){
+        AudioManager.GalaxyDespawnSource.Play();
+        RemoveCurrentGalaxyArm();
+        gameObject.SetActive(false);
+        Destroy(gameObject);
+    }
+
+    
 }
+

@@ -121,6 +121,7 @@ public class GalaxyArm : MonoBehaviour
     
     IEnumerator UpdateColliderNextFrame()
     {
+        Galaxy.Instance.GetComponent<Galaxy>().localStarScale = stars[0].transform.localScale;
         yield return null; // Wait one frame
         RearrangeStars();
         PositionDust();
@@ -203,10 +204,11 @@ public class GalaxyArm : MonoBehaviour
                 
                 float minimumDistance = 100000f;
                 //int miniumDistanceIndex = 0;
-                int whereIndex = -1;
+                //int whereIndex = -1;
                 for (int i = 0; i < starsTransforms.Count; i++)
                 {
                     Transform heldStar = starsTransforms[i];
+                    
                     float starDistance = Vector3.Distance(collidingStar.transform.position, heldStar.position);
                     if (starDistance < minimumDistance)
                     {

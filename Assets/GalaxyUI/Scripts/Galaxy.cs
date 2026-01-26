@@ -16,6 +16,7 @@ public class Galaxy : MonoBehaviour
     public int numOfArms = 15;
     public GameObject armPrefeb;
     public List<GameObject> arms = new List<GameObject>();
+    [HideInInspector] public Vector3 localStarScale =  Vector3.one;
 
     private void Awake()
     {
